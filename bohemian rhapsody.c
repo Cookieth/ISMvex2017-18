@@ -3,10 +3,12 @@
 #pragma config(Motor,  port4,           backRight,     tmotorVex393_MC29, openLoop, reversed, driveRight)
 #pragma config(Motor,  port5,           backLeft,      tmotorVex393_MC29, openLoop, driveLeft)
 
+//Central Functions Section
 void controllerBasic();
+void turnAround();
+void liftBasic();
 
 //Drive Controller Section
-void turnAround();
 void allOff();
 
 //Lift Controller Section
