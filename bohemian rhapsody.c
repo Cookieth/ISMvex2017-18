@@ -10,6 +10,10 @@ void liftBasic();
 
 //Drive Controller Section
 void allOff();
+void motorForward();
+void motorBackward();
+void motorLeftOn();
+void motorRightOn();
 
 //Lift Controller Section
 void extendArm();
@@ -85,6 +89,34 @@ void allOff(){
 	motor[backRight] = 0;
 	motor[frontLeft] = 0;
 	motor[frontRight] = 0;
+}
+
+void motorForward(){
+	motor[backLeft] = 127;
+	motor[backRight] = 127;
+	motor[frontLeft] = 127;
+	motor[frontRight] = 127;
+}
+
+void motorBackward(){
+	motor[backLeft] = -127;
+	motor[backRight] = -127;
+	motor[frontLeft] = -127;
+	motor[frontRight] = -127;
+}
+
+void motorLeftOn(){
+	motor[backLeft] = 127;
+	motor[backRight] = 0;
+	motor[frontLeft] = 127;
+	motor[frontRight] = 0;
+}
+
+void motorRightOn(){
+	motor[backLeft] = 0;
+	motor[backRight] = 127;
+	motor[frontLeft] = 0;
+	motor[frontRight] = 127;
 }
 
 //==================================================================================================
