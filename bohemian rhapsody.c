@@ -6,8 +6,15 @@
 
 void controllerBasic();
 
+//Drive Controller Section
 void turnAround();
 void allOff();
+
+//Lift Controller Section
+void extendArm();
+void retractArm();
+void openClaw();
+void closeclaw();
 
 task main{
 	while(true){
@@ -17,7 +24,7 @@ task main{
 }
 
 //==================================================================================================
-//                               C O N T R O L L E R   S E C T I O N
+//                             D R I V E   C O N T R O L L E R   S E C T I O N
 //==================================================================================================
 
 void controllerBasic(){
@@ -48,3 +55,57 @@ void allOff(){
 	motor[frontLeft] = 0;
 	motor[frontRight] = 0;
 }
+
+//==================================================================================================
+//                              L I F T   C O N T R O L L E R   S E C T I O N
+//==================================================================================================
+
+void extendArm(){
+	motor[] = 127;
+	motor[] = 127;
+}
+
+void closeClaw(){
+	motor[] = 127;
+	motor[] = 127;
+}
+
+void retractArm(){
+	motor[] = -127;
+	motor[] = -127;
+}
+
+void openClaw(){
+	motor[] = -127;
+	motor[] = -127;
+}
+
+void autoGrab(){
+	extendArm();
+	wait1Msec(0000);
+	
+	closeClaw();
+	wait1Msec(0000);
+	
+	retractArm();
+	wait1Msec(0000);
+	
+	openClaw();
+	wait1Msec(0000);
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
