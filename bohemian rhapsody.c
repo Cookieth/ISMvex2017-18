@@ -66,10 +66,10 @@ void turnAround(){
 }
 
 void liftBasic(){
-	while(vexRT[IDKWHICHBUTTONYET] == 1){
+	while(vexRT[Btn5U] == 1){
 		extendArm();
 	}
-	while(vexRT[IDKWHICHBUTTONYET] == 1){
+	while(vexRT[Btn5D] == 1){
 		retractArm();
 	}
 	while(vexRT[IDKWHICHBUTTONYET] == 1){
