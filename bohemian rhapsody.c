@@ -10,7 +10,6 @@
 //Central Functions Section
 void controllerBasic();
 void turnAround();
-//void liftBasic();
 
 //Drive Controller Section
 void allOff();
@@ -19,21 +18,10 @@ void motorBackward();
 void motorLeftOn();
 void motorRightOn();
 
-/*
-//Lift Controller Section
-void extendArm();
-void retractArm();
-void openClaw();
-void closeClaw();
-void moveArm(int power);
-void autoGrab();*/
-
 task main{
 	while(true){
 		controllerBasic();
 		turnAround();
-		
-		liftBasic();
 	}
 }
 
@@ -79,19 +67,6 @@ void turnAround(){
 	}
 }
 
-/*
-void liftBasic(){
-	while(vexRT[Ch3Xmtr2] > 0){
-		moveArm(vexRT[Ch3Xmtr2]);
-	}
-	while(vexRT[Btn8UXmtr2] == 1){
-		openClaw();
-	}
-	while(vexRT[Btn8DXmtr2] == 1){
-		closeClaw();
-	}
-}*/
-
 //==================================================================================================
 //                             D R I V E   C O N T R O L L E R   S E C T I O N
 //==================================================================================================
@@ -130,48 +105,3 @@ void motorRightOn(){
 	motor[frontLeft] = 0;
 	motor[frontRight] = 127;
 }
-
-/*
-//==================================================================================================
-//                              L I F T   C O N T R O L L E R   S E C T I O N
-//==================================================================================================
-
-void moveArm(int power){
-	motor[leftArm] = power;
-	motor[rightArm] = power;
-}
-
-void extendArm(){
-	motor[leftArm] = 127;
-	motor[rightArm] = 127;
-}
-
-void closeClaw(){
-	motor[leftArm] = 127;
-	motor[rightArm] = 127;
-}
-
-void retractArm(){
-	motor[leftArm] = -127;
-	motor[rightArm] = -127;
-}
-
-void openClaw(){
-	motor[claw] = -127;
-}
-
-void autoGrab(){
-	extendArm();
-	wait1Msec(0000);
-	
-	closeClaw();
-	wait1Msec(0000);
-	
-	retractArm();
-	wait1Msec(0000);
-	
-	openClaw();
-	wait1Msec(0000);
-	
-}
-*/
