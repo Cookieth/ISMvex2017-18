@@ -62,7 +62,6 @@ void controllerBasic(){
 		motorBackward();
 		motorLeftOn();
 		motorRightOn();
-		autoGrab();
 	}
 }
 
