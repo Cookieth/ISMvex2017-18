@@ -24,6 +24,8 @@ void motorForward();
 void motorBackward();
 void motorLeftOn();
 void motorRightOn();
+void motorPointC();
+void motorPointCC();
 void driveDirectionDuration(int direction, int duration);
 
 //==================================================================================================
@@ -51,9 +53,13 @@ task autonomous()
 	int backward = 2;
 	int left = 3;
 	int right = 4;
+	int pointC = 5;
+	int pointCC = 6;
 	
-	driveDirectionDuration(forward, 2300);
-	driveDirectionDuration(backward, 0010);
+	driveDirectionDuration(forward, 2200);
+	driveDirectionDuration(pointC, 900);
+	driveDirectionDuration(forward, 2200);
+	
 	
 	allOff();
 }
@@ -146,6 +152,20 @@ void motorRightOn(){
 	motor[frontRight] = 127;
 }
 
+void motorPointCC(){
+	motor[backLeft] = -127;
+	motor[backRight] = 127;
+	motor[frontLeft] = -127;
+	motor[frontRight] = 127;
+}
+
+void motorPointC(){
+	motor[backLeft] = 127;
+	motor[backRight] = -127;
+	motor[frontLeft] = 127;
+	motor[frontRight] = -127;
+}
+
 void driveDirectionDuration(int direction, int duration){
 	
 	//1 = Forward
@@ -168,6 +188,14 @@ void driveDirectionDuration(int direction, int duration){
 	}
 	else if(direction == 4){
 		motorRightOn();
+		wait1Msec(duration);
+	}
+	else if(direction == 5){
+		motorPointC();
+		wait1Msec(duration);
+	}
+	else if(direction ==6){
+		motorPointCC();
 		wait1Msec(duration);
 	}
 	else{
