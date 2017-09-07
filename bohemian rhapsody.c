@@ -56,8 +56,11 @@ task autonomous()
 	int pointC = 5;
 	int pointCC = 6;
 	
+	//180D without weight is 1120
+	//180D with weight is 
+	
 	driveDirectionDuration(forward, 2200);
-	driveDirectionDuration(pointC, 900);
+	driveDirectionDuration(pointC, 22400);
 	driveDirectionDuration(forward, 2200);
 	
 	
