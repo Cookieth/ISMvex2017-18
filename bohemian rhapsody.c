@@ -52,11 +52,10 @@ task autonomous()
 	int left = 3;
 	int right = 4;
 	
-	driveDirectionDuration(forward, 2000);
-	driveDirectionDuration(backward, 2000);
-	driveDirectionDuration(left, 1000);
+	driveDirectionDuration(forward, 2300);
+	driveDirectionDuration(backward, 0010);
 	
-	allOff();	
+	allOff();
 }
 
 task usercontrol(){
