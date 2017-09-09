@@ -1,3 +1,6 @@
+#pragma config(Sensor, dgtl1,  ,               sensorTouch)
+#pragma config(Sensor, dgtl9,  RightBottomEnc, sensorQuadEncoder)
+#pragma config(Sensor, dgtl11, LeftBottomEnc,  sensorQuadEncoder)
 #pragma config(Motor,  port2,           frontLeft,     tmotorVex393_MC29, openLoop, driveLeft)
 #pragma config(Motor,  port3,           frontRight,    tmotorVex393_MC29, openLoop, driveRight)
 #pragma config(Motor,  port4,           backRight,     tmotorVex393_MC29, openLoop, driveRight)
@@ -13,6 +16,10 @@
 #pragma competitionControl(Competition)
 
 #include "Vex_Competition_Includes.c"
+
+//Motor on values
+int leftMotors = 127;
+int rightMotors = 100;
 
 //Central Functions Section
 void controllerBasic();
@@ -60,7 +67,8 @@ task autonomous()
 	//180D with weight is 
 	
 	driveDirectionDuration(forward, 2200);
-	driveDirectionDuration(pointC, 22400);
+	driveDirectionDuration(left, 1000);
+	driveDirectionDuration(pointC, 1240);
 	driveDirectionDuration(forward, 2200);
 	
 	
@@ -71,6 +79,13 @@ task usercontrol(){
 	while (true){
 		controllerBasic();
 		turnAround();
+		
+		if(sensorValue[RightBottomEnc]+SensorValue[RightBottomEnc] > 2){
+			
+		}
+		else if(sensorValue[RightBottomEnc]+SensorValue[RightBottomEnc] > 2){
+			
+		}
 	}
 }	
 
@@ -128,45 +143,45 @@ void allOff(){
 }
 
 void motorForward(){
-	motor[backLeft] = 127;
-	motor[backRight] = 127;
-	motor[frontLeft] = 127;
-	motor[frontRight] = 127;
+	motor[backLeft] = leftMotors;
+	motor[backRight] = rightMotors;
+	motor[frontLeft] = leftMotors;
+	motor[frontRight] = rightMotors;
 }
 
 void motorBackward(){
-	motor[backLeft] = -127;
-	motor[backRight] = -127;
-	motor[frontLeft] = -127;
-	motor[frontRight] = -127;
+	motor[backLeft] = -leftMotors;
+	motor[backRight] = -rightMotors;
+	motor[frontLeft] = -leftMotors;
+	motor[frontRight] = -rightMotors;
 }
 
 void motorLeftOn(){
-	motor[backLeft] = 127;
+	motor[backLeft] = leftMotors;
 	motor[backRight] = 0;
-	motor[frontLeft] = 127;
+	motor[frontLeft] = leftMotors;
 	motor[frontRight] = 0;
 }
 
 void motorRightOn(){
 	motor[backLeft] = 0;
-	motor[backRight] = 127;
+	motor[backRight] = rightMotors;
 	motor[frontLeft] = 0;
-	motor[frontRight] = 127;
+	motor[frontRight] = rightMotors;
 }
 
 void motorPointCC(){
-	motor[backLeft] = -127;
-	motor[backRight] = 127;
-	motor[frontLeft] = -127;
-	motor[frontRight] = 127;
+	motor[backLeft] = -leftMotors;
+	motor[backRight] = rightMotors;
+	motor[frontLeft] = -leftMotors;
+	motor[frontRight] = rightMotors;
 }
 
 void motorPointC(){
-	motor[backLeft] = 127;
-	motor[backRight] = -127;
-	motor[frontLeft] = 127;
-	motor[frontRight] = -127;
+	motor[backLeft] = leftMotors;
+	motor[backRight] = -rightMotors;
+	motor[frontLeft] = leftMotors;
+	motor[frontRight] = -rightMotors;
 }
 
 void driveDirectionDuration(int direction, int duration){
