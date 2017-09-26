@@ -26,6 +26,7 @@ void controllerBasic();
 void turnAround();
 
 //Drive Controller Section
+void Arcade(int x, int y);
 void allOff();
 void motorForward();
 void motorBackward();
@@ -103,11 +104,8 @@ task usercontrol(){
 //==================================================================================================
 
 void controllerBasic(){
-	motor[frontLeft] = vexRT(Ch3);
-	motor[backLeft] = vexRT(Ch3);
-
-	motor[frontRight] = vexRT(Ch2);
-	motor[backRight] = vexRT(Ch2);
+	
+	Arcade(vexRT(Ch2), vexRT(Ch1));
 	
 	while(vexRT[Btn7U] == 1){
 		motorForward();
@@ -134,6 +132,30 @@ void turnAround(){
 //==================================================================================================
 //                             D R I V E   C O N T R O L L E R   S E C T I O N
 //==================================================================================================
+
+void Arcade(int x, int y){
+    		int powY;
+    		int powX;
+    		int powRightMotor;
+    		int powLeftMotor;
+		
+    		powY = (y * 100) / 127;         // joystick y axis gives maximum power level
+    		powX = (x * 100) / 127;         // x axis determines which motor is reduced or
+                                    // reversed for a turn
+
+    		if (powX < 0){
+        		powLeftMotor = (powY * (100 + (2 * powX))/100); // left motor reduced for right turn
+        		powRightMotor = powY;                           // right motor not changed
+    		}
+    		else
+    		{
+        		powRightMotor = (powY * (100 - (2 * powX))/100); // right motor reduced for left turn
+        		powLeftMotor = powY;                            // left motor not changed
+    		}
+
+    		motor[motorRight] = powRightMotor;
+    		motor[motorLeft]  = powLeftMotor;
+	}
 
 void allOff(){
 	motor[backLeft] = 0;
