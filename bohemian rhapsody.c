@@ -118,6 +118,9 @@ void controllerBasic(){
 		motor[lifters] = 0;
 	}
 	
+	motor[leftArm] = vexRT[Ch3];
+	motor[rightArm] = vexRT[Ch3]
+	
 	while(vexRT[Btn7U] == 1){
 		motorForward();
 		motorBackward();
@@ -227,3 +230,11 @@ void driveDirectionDuration(int direction, int duration){
 	
 	}
 }
+
+//==================================================================================================
+//                               C L A W   C O N T R O L L E R   S E C T I O N
+//==================================================================================================
+
+
+
+
