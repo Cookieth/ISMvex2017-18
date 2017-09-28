@@ -18,8 +18,8 @@
 #include "Vex_Competition_Includes.c"
 
 //Motor on values
-int leftMotors = 127;
-int rightMotors = 100;
+int leftMotorsVal = 127;
+int rightMotorsVal = 100;
 
 //Central Functions Section
 void controllerBasic();
@@ -108,18 +108,14 @@ void controllerBasic(){
 	Arcade(vexRT(Ch1), vexRT(Ch2));
 	
 	if(vexRT[Btn5U] == 1){
-		motor[leftLifter] = 127;
-		motor[rightLifter] = 127;
+		motor[lifters] = 127;
 		wait1Msec(0300);
-		motor[leftLifter] = 0;
-		motor[rightLifter] = 0;
+		motor[lifters] = 0;
 	}
 	else if(vexRT[Btn5D] == 1){
-		motor[leftLifter] = -127;
-		motor[rightLifter] = -127;
+		motor[lifters] = -127;
 		wait1Msec(0300);
-		motor[leftLifter] = 0;
-		motor[rightLifter] = 0;
+		motor[lifters] = 0;
 	}
 	
 	while(vexRT[Btn7U] == 1){
@@ -132,11 +128,8 @@ void controllerBasic(){
 
 void turnAround(){
 	if(vexRT[Btn8D] == 1){
-		motor[frontLeft] = 127;
-		motor[backLeft] = 127;
-
-		motor[frontRight] = -127;
-		motor[backRight] = -127;
+		motor[leftMotors] = 127;
+		motor[rightMotors] = -127;
 
 		wait1Msec(2125);
 
@@ -150,72 +143,52 @@ void turnAround(){
 
 void Arcade(int Ch1, int Ch2){
 	if(Ch1<=-30){
-		motor[backRight] = -Ch1;
-		motor[backLeft] = Ch2;
-		motor[frontRight] = -Ch1;
-		motor[frontLeft] = Ch2;
+		motor[rightMotors] = -Ch1;
+		motor[leftMotors] = Ch2;
 	}
 	else if(Ch1>=30){
-		motor[backRight] = Ch2;
-		motor[backLeft] = Ch1;
-		motor[frontRight] = Ch2;
-		motor[frontLeft] = Ch1;
+		motor[rightMotors] = Ch2;
+		motor[leftMotors] = Ch1;
 	}
 	else{
-		motor[backRight] = Ch2;
-		motor[backLeft] = Ch2;
-		motor[frontRight] = Ch2;
-		motor[frontLeft] = Ch2;
-}
+		motor[rightMotors] = Ch2;
+		motor[leftMotors] = Ch2;
+	}
 }
 
 void allOff(){
-	motor[backLeft] = 0;
-	motor[backRight] = 0;
-	motor[frontLeft] = 0;
-	motor[frontRight] = 0;
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
 }
 
 void motorForward(){
-	motor[backLeft] = leftMotors;
-	motor[backRight] = rightMotors;
-	motor[frontLeft] = leftMotors;
-	motor[frontRight] = rightMotors;
+	motor[leftMotors] = leftMotorsVal;
+	motor[rightMotors] = rightMotorsVal;
 }
 
 void motorBackward(){
-	motor[backLeft] = -leftMotors;
-	motor[backRight] = -rightMotors;
-	motor[frontLeft] = -leftMotors;
-	motor[frontRight] = -rightMotors;
+	motor[leftMotors] = -leftMotorsVal;
+	motor[rightMotors] = -rightMotorsVal;
 }
 
 void motorLeftOn(){
-	motor[backLeft] = leftMotors;
-	motor[backRight] = 0;
-	motor[frontLeft] = leftMotors;
-	motor[frontRight] = 0;
+	motor[leftMotors] = leftMotorsVal;
+	motor[rightMotors] = 0;
 }
 
 void motorRightOn(){
-	motor[backLeft] = 0;
-	motor[backRight] = rightMotors;
-	motor[frontLeft] = 0;
-	motor[frontRight] = rightMotors;
+	motor[leftMotors] = 0;
+	motor[rightMotors] = rightMotorsVal;
 }
 
 void motorPointCC(){
-	motor[backLeft] = -leftMotors;
-	motor[backRight] = rightMotors;
-	motor[frontLeft] = -leftMotors;
-	motor[frontRight] = rightMotors;
+	motor[leftMotors] = -leftMotorsVal;
+	motor[rightMotors] = rightMotorsVal;
 }
 
 void motorPointC(){
-	motor[backLeft] = leftMotors;
-	motor[backRight] = -rightMotors;
-	motor[frontLeft] = leftMotors;
-	motor[frontRight] = -rightMotors;
+	motor[leftMotors] = leftMotorsVal;
+	motor[rightMotors] = -rightMotorsVal;
 }
 
 void driveDirectionDuration(int direction, int duration){
