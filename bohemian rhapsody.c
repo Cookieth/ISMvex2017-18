@@ -3,8 +3,8 @@
 #pragma config(Sensor, dgtl11, LeftBottomEnc,  sensorQuadEncoder)
 #pragma config(Motor,  port2,           leftMotors,    tmotorVex393_MC29, openLoop, driveLeft)
 #pragma config(Motor,  port3,           rightMotors,   tmotorVex393_MC29, openLoop, driveRight)
-#pragma config(Motor,  port4,           leftArms,      tmotorVex393_MC29, openLoop, driveLeft)
-#pragma config(Motor,  port5,           rightArms,     tmotorVex393_MC29, openLoop, driveRight)
+#pragma config(Motor,  port4,           leftArm,      tmotorVex393_MC29, openLoop, driveLeft)
+#pragma config(Motor,  port5,           rightArm,     tmotorVex393_MC29, openLoop, driveRight)
 #pragma config(Motor,  port6,           lifters,       tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port7,           clawMovers,    tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port8,           claw,          tmotorVex393_MC29, openLoop)
@@ -109,12 +109,11 @@ void controllerBasic(){
 	
 	if(vexRT[Btn5U] == 1){
 		motor[lifters] = 127;
-		wait1Msec(0300);
-		motor[lifters] = 0;
 	}
 	else if(vexRT[Btn5D] == 1){
 		motor[lifters] = -127;
-		wait1Msec(0300);
+	}
+	else{
 		motor[lifters] = 0;
 	}
 	
