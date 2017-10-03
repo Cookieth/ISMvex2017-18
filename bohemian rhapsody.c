@@ -117,10 +117,28 @@ void controllerBasic(){
 		motor[lifters] = 0;
 	}
 	
-	motor[leftArm] = vexRT[Ch3];
-	motor[rightArm] = vexRT[Ch3];
-	
 	while(vexRT[Btn7U] == 1){
+		motor[leftArm] = 127;
+		motor[rightArm] = 127;
+	}
+	while(vexRT[Btn7D] == 1){
+		motor[leftArm] = -127;
+		motor[rightArm] = -127;
+	}
+	while(vexRT[Btn8U] == 1){
+		for(d = 0; d < 255; d++){
+			motor[clawMovers] = 127;
+			motor[wrist] = d;
+		}
+	}
+	while(vexRT[Btn8D] == 1){
+		for(d = 255; d > 0; d--){
+			motor[clawMovers] = 127;
+			motor[wrist] = d;
+		}
+	}
+	
+	while(vexRT[Btn7R] == 1){
 		motorForward();
 		motorBackward();
 		motorLeftOn();
