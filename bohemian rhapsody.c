@@ -133,7 +133,7 @@ void controllerBasic(){
 	}
 	while(vexRT[Btn8D] == 1){
 		for(d = 255; d > 0; d--){
-			motor[clawMovers] = 127;
+			motor[clawMovers] = -127;
 			motor[wrist] = d;
 		}
 	}
