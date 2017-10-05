@@ -124,8 +124,8 @@ void controllerBasic(){
 		motor[rightArm] = 127;
 	}
 	else if(vexRT[Btn7D] == 1){
-		motor[leftArm] = 127;
-		motor[rightArm] = 127;
+		motor[leftArm] = -127;
+		motor[rightArm] = -127;
 	}
 	else{
 		motor[leftArm] = 0;
@@ -135,18 +135,23 @@ void controllerBasic(){
 	//SERVOS
 	if(vexRT[Btn8U] == 1){
 		motor[clawMovers] = 127;
-		for(int don = 0; don < 255; don++){
-			motor[wrist] = don;
-			wait1Msec(0050);
-		}
 	}
 	else if(vexRT[Btn8D] == 1){
 		motor[clawMovers] = -127;
-		for(int dt = 255; dt > 0; dt--){
+	}
+	else if(vexRT[Btn8R] == 1){
+		for(int dt = 0; dt < 255; dt++){
 			motor[wrist] = dt;
 			wait1Msec(0050);
 		}
 	}
+	else if(vexRT[Btn8R] == 1){
+		for(int d = 255; d > 0; d--){
+			motor[wrist] = d;
+			wait1Msec(0050);
+		}
+	}
+	
 	else{
 		motor[clawMovers] = 0;
 	}
