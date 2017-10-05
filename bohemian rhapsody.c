@@ -107,6 +107,7 @@ void controllerBasic(){
 	
 	Arcade(vexRT(Ch1), vexRT(Ch2));
 	
+	//LIFTERS
 	if(vexRT[Btn5U] == 1){
 		motor[lifters] = 127;
 	}
@@ -117,32 +118,39 @@ void controllerBasic(){
 		motor[lifters] = 0;
 	}
 	
-	while(vexRT[Btn7U] == 1){
+	//ARMS
+	if(vexRT[Btn7U] == 1){
 		motor[leftArm] = 127;
 		motor[rightArm] = 127;
 	}
-	while((vexRT[Btn7U] ==0) && (vexRT[Btn7D] == 0)){
+	else if(vexRT[Btn7D] == 1){
+		motor[leftArm] = 127;
+		motor[rightArm] = 127;
+	}
+	else{
 		motor[leftArm] = 0;
 		motor[rightArm] = 0;
 	}
-	while(vexRT[Btn7D] == 1){
-		motor[leftArm] = -127;
-		motor[rightArm] = -127;
-	}
-	while(vexRT[Btn8U] == 1){
+	
+	//SERVOS
+	if(vexRT[Btn8U] == 1){
 		motor[clawMovers] = 127;
 		for(int don = 0; don < 255; don++){
 			motor[wrist] = don;
 			wait1Msec(0050);
 		}
 	}
-	while(vexRT[Btn8D] == 1){
+	else if(vexRT[Btn8D] == 1){
 		motor[clawMovers] = -127;
 		for(int dt = 255; dt > 0; dt--){
 			motor[wrist] = dt;
 			wait1Msec(0050);
 		}
 	}
+	else{
+		motor[clawMovers] = 0;
+	}
+	
 	
 	while(vexRT[Btn7R] == 1){
 		motorForward();
