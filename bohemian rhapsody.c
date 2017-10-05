@@ -121,20 +121,26 @@ void controllerBasic(){
 		motor[leftArm] = 127;
 		motor[rightArm] = 127;
 	}
+	while((vexRT[Btn7U] ==0) && (vexRT[Btn7D] == 0)){
+		motor[leftArm] = 0;
+		motor[rightArm] = 0;
+	}
 	while(vexRT[Btn7D] == 1){
 		motor[leftArm] = -127;
 		motor[rightArm] = -127;
 	}
 	while(vexRT[Btn8U] == 1){
-		for(d = 0; d < 255; d++){
-			motor[clawMovers] = 127;
-			motor[wrist] = d;
+		motor[clawMovers] = 127;
+		for(int don = 0; don < 255; don++){
+			motor[wrist] = don;
+			wait1Msec(0050);
 		}
 	}
 	while(vexRT[Btn8D] == 1){
-		for(d = 255; d > 0; d--){
-			motor[clawMovers] = -127;
-			motor[wrist] = d;
+		motor[clawMovers] = -127;
+		for(int dt = 255; dt > 0; dt--){
+			motor[wrist] = dt;
+			wait1Msec(0050);
 		}
 	}
 	
