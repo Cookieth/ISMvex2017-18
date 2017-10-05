@@ -34,7 +34,7 @@ void motorLeftOn();
 void motorRightOn();
 void motorPointC();
 void motorPointCC();
-void driveDirectionDuration(int direction, int duration);
+void driveFunct(int direction, int duration);
 
 //==================================================================================================
 //                     		      T A S K   S E C T I O N
@@ -63,14 +63,17 @@ task autonomous()
 	int right = 4;
 	int pointC = 5;
 	int pointCC = 6;
+	int liftersUP = 7;
+	int liftersDOWN = 8;
 	
 	//180D without weight is 1120
 	//180D with weight is 
 	
-	driveDirectionDuration(forward, 2200);
-	driveDirectionDuration(left, 1000);
-	driveDirectionDuration(pointC, 1240);
-	driveDirectionDuration(forward, 2200);
+	driveFunct(forward, 2200);
+	driveFunct(liftersUP, 1500);
+	driveFunct(left, 1000);
+	driveFunct(pointC, 1240);
+	driveFunct(forward, 2200);
 	
 	
 	allOff();
@@ -80,15 +83,17 @@ task usercontrol(){
 	while (true){
 		controllerBasic();
 		turnAround();
-		
-		//if(sensorValue[RightBottomEnc]+sensorValue[RightBottomEnc] > 2){
-			
-		//}
-		//else if(sensorValue[RightBottomEnc]+sensorValue[RightBottomEnc] > 2){
-			
-		// }
 	}
 }	
+
+
+
+
+
+
+
+
+
 
 //==================================================================================================
 //                           C E N T R A L   F U N C T I O N S   S E C T I O N
@@ -107,6 +112,7 @@ void controllerBasic(){
 	
 	Arcade(vexRT(Ch1), vexRT(Ch2));
 	
+	//========
 	//LIFTERS
 	if(vexRT[Btn5U] == 1){
 		motor[lifters] = 127;
@@ -118,6 +124,7 @@ void controllerBasic(){
 		motor[lifters] = 0;
 	}
 	
+	//========
 	//ARMS
 	if(vexRT[Btn7U] == 1){
 		motor[leftArm] = 127;
@@ -132,6 +139,7 @@ void controllerBasic(){
 		motor[rightArm] = 0;
 	}
 	
+	//========
 	//SERVOS
 	if(vexRT[Btn8U] == 1){
 		motor[clawMovers] = 127;
@@ -174,6 +182,9 @@ void controllerBasic(){
 	}
 	
 	
+	
+	//========
+	//Extra Necessary
 	while(vexRT[Btn6D] == 1){
 		motorForward();
 		motorBackward();
@@ -247,7 +258,7 @@ void motorPointC(){
 	motor[rightMotors] = -rightMotorsVal;
 }
 
-void driveDirectionDuration(int direction, int duration){
+void driveFunct(int direction, int duration){
 	
 	//1 = Forward
 	//2 = Backward
@@ -275,8 +286,16 @@ void driveDirectionDuration(int direction, int duration){
 		motorPointC();
 		wait1Msec(duration);
 	}
-	else if(direction ==6){
+	else if(direction == 6){
 		motorPointCC();
+		wait1Msec(duration);
+	}
+	else if(direction == 7){
+		motor[lifters] = 127;
+		wait1Msec(duration);
+	}
+	else if(direction == 8){
+		motor[lifters] = -127;
 		wait1Msec(duration);
 	}
 	else{
