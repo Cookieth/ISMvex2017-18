@@ -140,18 +140,17 @@ void controllerBasic(){
 		motor[clawMovers] = -127;
 	}
 	else if(vexRT[Btn8R] == 1){
-		for(int dt = 0; dt < 255; dt++){
-			motor[wrist] = dt;
+		for(int dt = -127; dt < 127; dt++){
+			setServo(wrist, -127);
 			wait1Msec(0050);
 		}
 	}
 	else if(vexRT[Btn8R] == 1){
-		for(int d = 255; d > 0; d--){
-			motor[wrist] = d;
+		for(int d = 127; d > -127; d--){
+			setServo(wrist, -127);
 			wait1Msec(0050);
 		}
 	}
-	
 	else{
 		motor[clawMovers] = 0;
 	}
