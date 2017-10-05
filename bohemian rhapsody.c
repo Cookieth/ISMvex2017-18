@@ -65,13 +65,15 @@ task autonomous()
 	int pointCC = 6;
 	int liftersUP = 7;
 	int liftersDOWN = 8;
+	int armsUP = 9;
+	int armsDOWN = 10;
 	
 	//180D without weight is 1120
 	//180D with weight is 
 	
+	driveFunct(armsUP, 2500);
 	driveFunct(forward, 2200);
 	driveFunct(liftersUP, 1500);
-	driveFunct(left, 1000);
 	driveFunct(pointC, 1240);
 	driveFunct(forward, 2200);
 	
@@ -296,6 +298,16 @@ void driveFunct(int direction, int duration){
 	}
 	else if(direction == 8){
 		motor[lifters] = -127;
+		wait1Msec(duration);
+	}
+	else if(direction == 9){
+		motor[leftArm] = 127;
+		motor[rightArm] = 127;
+		wait1Msec(duration);
+	}
+	else if(direction == 10){
+		motor[leftArm] = -127;
+		motor[rightArm] = -127;
 		wait1Msec(duration);
 	}
 	else{
