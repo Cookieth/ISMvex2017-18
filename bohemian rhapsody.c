@@ -141,13 +141,13 @@ void controllerBasic(){
 	}
 	else if(vexRT[Btn8R] == 1){
 		for(int dt = -127; dt < 127; dt++){
-			setServo(wrist, dt);
+			motor[wrist] = dt; 
 			wait1Msec(0050);
 		}
 	}
-	else if(vexRT[Btn8R] == 1){
+	else if(vexRT[Btn8L] == 1){
 		for(int d = 127; d > -127; d--){
-			setServo(wrist, d);
+			motor[wrist] = d;
 			wait1Msec(0050);
 		}
 	}
@@ -165,7 +165,7 @@ void controllerBasic(){
 }
 
 void turnAround(){
-	if(vexRT[Btn8D] == 1){
+	if(vexRT[Btn6D] == 1){
 		motor[leftMotors] = 127;
 		motor[rightMotors] = -127;
 
