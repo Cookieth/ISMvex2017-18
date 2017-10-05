@@ -141,13 +141,13 @@ void controllerBasic(){
 	}
 	else if(vexRT[Btn8R] == 1){
 		for(int dt = -127; dt < 127; dt++){
-			setServo(wrist, -127);
+			setServo(wrist, dt);
 			wait1Msec(0050);
 		}
 	}
 	else if(vexRT[Btn8R] == 1){
 		for(int d = 127; d > -127; d--){
-			setServo(wrist, -127);
+			setServo(wrist, d);
 			wait1Msec(0050);
 		}
 	}
