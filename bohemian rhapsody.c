@@ -71,11 +71,7 @@ task autonomous()
 	//180D without weight is 1120
 	//180D with weight is 
 	
-	driveFunct(armsUP, 2500);
-	driveFunct(forward, 2200);
-	driveFunct(liftersUP, 1500);
-	driveFunct(pointC, 1240);
-	driveFunct(forward, 2200);
+	//**TO DO: INSERT AUTONOMOUS CODE**
 	
 	
 	allOff();
