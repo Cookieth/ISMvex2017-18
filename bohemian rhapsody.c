@@ -112,7 +112,10 @@ task usercontrol(){
 
 void controllerBasic(){
 	
-	Arcade(vexRT(Ch4), vexRT(Ch3));
+	//Arcade(vexRT(Ch4), vexRT(Ch3));
+	
+	motor[leftMotors] = vexRT(Ch3);
+	motor[rightMotors] = vexRT(Ch4);
 	
 	//========
 	//LIFTERS
@@ -151,11 +154,7 @@ void controllerBasic(){
 	else if(vexRT[Btn8L] == 1){
 		motor[wrist] = -60; //changed this from -20 to -60, noticed lack of power to move wrist down from certain positions
 	}
-	else { //added this part to get motors to stop despite other buttons being pressed
-		motor[wrist] = 0; 
-	}
-	
-	if(vexRT[Btn8U] == 1){
+	else if(vexRT[Btn8U] == 1){
 		//per driven gear rotation, clawMovers moves 0.143 of full rotation
 		//per driven gear rotation, wrist moves 0.2 of full rotation
 		//thus, in order to keep wrist parallel, the ratio of clawMovers to wrist rotation is 0.715
@@ -174,10 +173,8 @@ void controllerBasic(){
 	if(vexRT[Btn6U] == 1){
 		motor[claw] = 127; //this closes claw, not changed
 	}
-	else if(vexRT[Btn6U] == 1){
+	else if(vexRT[Btn6D] == 1){
 		motor[claw] = -127; //this opens claw, changed from positive to negative
-		wait1Msec(0500);
-		motor[claw] = 0;
 	}
 	else{
 		motor[claw] = 0; //removed other stop motor statements
@@ -187,7 +184,7 @@ void controllerBasic(){
 	
 	//========
 	//Extra Necessary
-	while(vexRT[Btn6D] == 1){
+	while(0 == 1){
 		motorForward();
 		motorBackward();
 		motorLeftOn();
@@ -196,7 +193,7 @@ void controllerBasic(){
 }
 
 void turnAround(){
-	if(vexRT[Btn6D] == 1){
+	if(0 == 1){
 		motor[leftMotors] = 127;
 		motor[rightMotors] = -127;
 
@@ -210,7 +207,7 @@ void turnAround(){
 //                             D R I V E   C O N T R O L L E R   S E C T I O N
 //==================================================================================================
 
-void Arcade(int Ch4, int Ch3){
+/*void Arcade(int Ch4, int Ch3){
 	if(Ch4<=-70){
 		motor[rightMotors] = -Ch4;
 		motor[leftMotors] = Ch3;
@@ -223,7 +220,7 @@ void Arcade(int Ch4, int Ch3){
 		motor[rightMotors] = Ch3;
 		motor[leftMotors] = Ch3;
 	}
-}
+}*/
 
 void allOff(){
 	motor[leftMotors] = 0;
