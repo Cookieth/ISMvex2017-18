@@ -112,7 +112,7 @@ task usercontrol(){
 
 void controllerBasic(){
 	
-	Arcade(vexRT(Ch1), vexRT(Ch2));
+	Arcade(vexRT(Ch4), vexRT(Ch3));
 	
 	//========
 	//LIFTERS
@@ -145,37 +145,39 @@ void controllerBasic(){
 	//SERVOS
 	//Zach'll put rubber bands to stop claw from walling when holding the claw
 	//if claw still falls, Zach will change the gearing and remodify
-	if(vexRT[Btn8U] == 1){
+	if(vexRT[Btn8R] == 1){
 		motor[wrist] = 60;
 	}
-	else if(vexRT[Btn8D] == 1){
+	else if(vexRT[Btn8L] == 1){
 		motor[wrist] = -60; //changed this from -20 to -60, noticed lack of power to move wrist down from certain positions
 	}
 	else { //added this part to get motors to stop despite other buttons being pressed
 		motor[wrist] = 0; 
 	}
 	
-	if(vexRT[Btn8R] == 1){
+	if(vexRT[Btn8U] == 1){
 		//per driven gear rotation, clawMovers moves 0.143 of full rotation
 		//per driven gear rotation, wrist moves 0.2 of full rotation
 		//thus, in order to keep wrist parallel, the ratio of clawMovers to wrist rotation is 0.715
 		motor[clawMovers] = 127; //0.715 of 127 is around 90 but lowering it to compensate for weight on clawMovers
-		motor[wrist] = -85; //changed this from -20 to -85
+		motor[wrist] = -35; //changed this from -20 to -85
 	}
-	else if(vexRT[Btn8L] == 1){
+	else if(vexRT[Btn8D] == 1){
 		motor[clawMovers] = -127;
-		motor[wrist] = 85; //changed this from 60 to 85
+		motor[wrist] = 75; //changed this from 60 to 85
 	}
 	else { //added this part to get motors to stop despite other buttons being pressed
 		motor[clawMovers] = 0;
 		motor[wrist] = 0;
 	}
 	
-	if(vexRT[Btn7R] == 1){
+	if(vexRT[Btn6U] == 1){
 		motor[claw] = 127; //this closes claw, not changed
 	}
-	else if(vexRT[Btn7L] == 1){
+	else if(vexRT[Btn6U] == 1){
 		motor[claw] = -127; //this opens claw, changed from positive to negative
+		wait1Msec(0500);
+		motor[claw] = 0;
 	}
 	else{
 		motor[claw] = 0; //removed other stop motor statements
@@ -208,18 +210,18 @@ void turnAround(){
 //                             D R I V E   C O N T R O L L E R   S E C T I O N
 //==================================================================================================
 
-void Arcade(int Ch1, int Ch2){
-	if(Ch1<=-70){
-		motor[rightMotors] = -Ch1;
-		motor[leftMotors] = Ch2;
+void Arcade(int Ch4, int Ch3){
+	if(Ch4<=-70){
+		motor[rightMotors] = -Ch4;
+		motor[leftMotors] = Ch3;
 	}
-	else if(Ch1>=70){
-		motor[rightMotors] = Ch2;
-		motor[leftMotors] = Ch1;
+	else if(Ch4>=70){
+		motor[rightMotors] = Ch3;
+		motor[leftMotors] = Ch4;
 	}
 	else{
-		motor[rightMotors] = Ch2;
-		motor[leftMotors] = Ch2;
+		motor[rightMotors] = Ch3;
+		motor[leftMotors] = Ch3;
 	}
 }
 
