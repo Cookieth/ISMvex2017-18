@@ -111,11 +111,12 @@ void controllerBasic(){
 	//Arcade(vexRT(Ch4), vexRT(Ch3));
 	
 	motor[leftMotors] = vexRT(Ch3);
-	motor[rightMotors] = vexRT(Ch4);
+	motor[rightMotors] = vexRT(Ch2);
 	
 	//========
 	//LIFTERS
 	if(vexRT[Btn5U] == 1){
+	
 		motor[lifters] = 127;
 	}
 	else if(vexRT[Btn5D] == 1){
@@ -127,49 +128,20 @@ void controllerBasic(){
 	
 	//========
 	//ARMS
-	if(vexRT[Btn7U] == 1){
-		motor[leftArm] = 127;
-		motor[rightArm] = 127;
-	}
-	else if(vexRT[Btn7D] == 1){
-		motor[leftArm] = -127;
-		motor[rightArm] = -127;
-	}
-	else{
-		motor[leftArm] = 0;
-		motor[rightArm] = 0;
-	}
+	motor[leftArm] = vexRT(Ch3Xmtr2);
+	motor[rightArm] = vexRT(Ch3Xmtr2);
 	
 	//========
 	//SERVOS
 	//Zach'll put rubber bands to stop claw from walling when holding the claw
 	//if claw still falls, Zach will change the gearing and remodify
-	if(vexRT[Btn8R] == 1){
-		motor[wrist] = 60;
-	}
-	else if(vexRT[Btn8L] == 1){
-		motor[wrist] = -60; //changed this from -20 to -60, noticed lack of power to move wrist down from certain positions
-	}
-	else if(vexRT[Btn8U] == 1){
-		//per driven gear rotation, clawMovers moves 0.143 of full rotation
-		//per driven gear rotation, wrist moves 0.2 of full rotation
-		//thus, in order to keep wrist parallel, the ratio of clawMovers to wrist rotation is 0.715
-		motor[clawMovers] = 127; //0.715 of 127 is around 90 but lowering it to compensate for weight on clawMovers
-		motor[wrist] = -35; //changed this from -20 to -85
-	}
-	else if(vexRT[Btn8D] == 1){
-		motor[clawMovers] = -127;
-		motor[wrist] = 75; //changed this from 60 to 85
-	}
-	else { //added this part to get motors to stop despite other buttons being pressed
-		motor[clawMovers] = 0;
-		motor[wrist] = 0;
-	}
 	
-	if(vexRT[Btn6U] == 1){
+	motor(clawMovers) = vexRT(Ch2Xmtr2);
+	
+	if(vexRT[Btn6UXmtr2] == 1){
 		motor[claw] = 127; //this closes claw, not changed
 	}
-	else if(vexRT[Btn6D] == 1){
+	else if(vexRT[Btn6DXmtr2] == 1){
 		motor[claw] = -127; //this opens claw, changed from positive to negative
 	}
 	else{
