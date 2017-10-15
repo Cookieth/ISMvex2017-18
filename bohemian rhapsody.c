@@ -85,15 +85,6 @@ task usercontrol(){
 	}
 }	
 
-
-
-
-
-
-
-
-
-
 //==================================================================================================
 //                           C E N T R A L   F U N C T I O N S   S E C T I O N
 //--------------------------------------------------------------------------------------------------
@@ -116,11 +107,10 @@ void controllerBasic(){
 	
 	//========
 	//LIFTERS
-	if(vexRT[Btn5U] == 1){
-	
+	if(vexRT[Btn5U] == 1 || vexRT[Btn5UXmtr2] == 1){
 		motor[lifters] = 127;
 	}
-	else if(vexRT[Btn5D] == 1){
+	else if(vexRT[Btn5D] == 1 || vexRT[Btn5D] == 1){
 		motor[lifters] = -127;
 	}
 	else{
@@ -139,10 +129,10 @@ void controllerBasic(){
 	
 	motor(clawMovers) = vexRT(Ch2Xmtr2);
 	
-	if(vexRT[Btn6UXmtr2] == 1){
+	if(vexRT[Btn6UXmtr2] == 1 || vexRT[Btn6U] == 1){
 		motor[claw] = 127; //this closes claw, not changed
 	}
-	else if(vexRT[Btn6DXmtr2] == 1){
+	else if(vexRT[Btn6DXmtr2] == 1 || vexRT[Btn6D] == 1){
 		motor[claw] = -127; //this opens claw, changed from positive to negative
 	}
 	else{
