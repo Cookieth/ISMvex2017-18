@@ -102,8 +102,39 @@ void controllerBasic(){
 	
 	//Arcade(vexRT(Ch4), vexRT(Ch3));
 	
-	motor[leftMotors] = vexRT(Ch3);
-	motor[rightMotors] = vexRT(Ch2);
+	//========
+	//BASE
+	if(vexRT[Btn8D] == 1) {
+		motor[claw] = 127; //open claw
+		wait1Msec(150);
+		motor[claw] = 0;
+		motorForward(); //move forward
+		wait1Msec(600);
+		allOff();
+		motor[claw] = -127; //close claw
+		wait1Msec(200);
+		motor[claw] = 0;
+		motorBackward(); //move backward
+		wait1Msec(600);
+		allOff();
+		
+	}
+	else if(vexRT[Btn7U] == 1) {
+		motorForward();
+	}
+	else if(vexRT[Btn7D] == 1) {
+		motorBackward();
+	}
+	else if(vexRT[Btn7L] == 1) {
+		motorPointCC();
+	}
+	else if(vexRT[Btn7R] == 1) {
+		motorPointC();
+	}
+	else {
+		motor[leftMotors] = vexRT(Ch3);
+		motor[rightMotors] = vexRT(Ch2);
+	}
 	
 	//========
 	//LIFTERS
