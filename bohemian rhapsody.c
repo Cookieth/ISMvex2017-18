@@ -1,4 +1,3 @@
-
 #pragma config(Sensor, dgtl9,  RightBottomEnc, sensorQuadEncoder)
 #pragma config(Sensor, dgtl11, LeftBottomEnc,  sensorQuadEncoder)
 #pragma config(Motor,  port2,           leftMotors,    tmotorVex393_MC29, openLoop, driveLeft)
@@ -106,18 +105,26 @@ void controllerBasic(){
 	//BASE
 	if(vexRT[Btn8D] == 1) {
 		motor[claw] = 127; //open claw
-		wait1Msec(150);
-		motor[claw] = 0;
-		motorForward(); //move forward
-		wait1Msec(600);
-		allOff();
-		motor[claw] = -127; //close claw
 		wait1Msec(200);
 		motor[claw] = 0;
+		motorForward(); //move forward
+		wait1Msec(390);
+		allOff();
+		motor[claw] = -127; //close claw
+		wait1Msec(250);
+		motor[claw] = 0;
 		motorBackward(); //move backward
-		wait1Msec(600);
+		wait1Msec(390);
 		allOff();
 		
+	}
+	else if(vexRT[Btn8U] == 1) {
+		motorBackward();
+		wait1Msec(190);
+	}
+	else if(vexRT[Btn8R] == 1) {
+		motorBackward();
+		wait1Msec(380);
 	}
 	else if(vexRT[Btn7U] == 1) {
 		motorForward();
