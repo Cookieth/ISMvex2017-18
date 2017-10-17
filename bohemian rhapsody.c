@@ -74,6 +74,82 @@ task autonomous()
 	//**TO DO: INSERT AUTONOMOUS CODE**
 	
 	
+	//ONE CONE ON HIGH STACK
+	motor[leftArm] = 127;
+	motor[rightArm] = 127;
+	wait1Msec(850);
+	motor[clawMovers] = 127;
+	wait1Msec(750);
+	motor[leftArm] = 0;
+	motor[rightArm] = 0;
+	wait1Msec(1000);
+	motor[leftMotors] = 127;
+	motor[rightMotors] = 20;
+	wait1Msec(0370);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	motor[clawMovers] = -60;
+	wait1Msec(0500);
+	motor[clawMovers] = 0;
+	motor[claw] = 127;
+	wait1Msec(1000);
+	motor[clawMovers] = 127;
+	motor[claw] = 0;
+	wait1Msec(1000);
+	motor[leftMotors] = -127;
+	motor[rightMotors] = -127;
+	motor[leftArm] = -127;
+	motor[rightArm] = -127;
+	wait1Msec(400);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	wait1Msec(0100);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	wait1Msec(0300);
+	
+	motor[clawMovers] = -127;
+	motor[rightMotors] = 127;
+	wait1Msec(0600);
+	motor[rightMotors] = 0;
+	wait1Msec(0600);
+	motor[clawMovers] = 0;
+	motor[claw] = 127;
+	wait1Msec(1000);
+	
+	//move forward to grab the cone
+	motor[leftMotors] = 127;
+	motor[rightMotors] = 90;
+	wait1Msec(0590);
+	motor[rightMotors] = 0;
+	motor[leftMotors] = 0;
+	motor[claw] = -127;
+	wait1Msec(1000);
+	motor[clawMovers] = 127;
+	wait1Msec(0800);
+	
+	
+	//MOVING AWAY WITH CONE
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 127;
+	motor[lifters] = -127;
+	wait1Msec(0600);
+	motor[leftMotors] = 127;
+	motor[rightMotors] = 0;
+	motor[lifters] = 0;
+	wait1Msec(0700);
+	motor[leftMotors] = 100;
+	motor[rightMotors] = 100;
+	wait1Msec(1000);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	motor[lifters] = 127;
+	wait1Msec(1000);
+	
+	
+	
+	allMotorsOff();
+	
 	allOff();
 }
 
