@@ -52,7 +52,7 @@ void pre_auton()
 
 task autonomous()
 {
-	
+
 	//1 = Forward
 	//2 = Backward
 	//3 = MOTOR Left
@@ -67,13 +67,13 @@ task autonomous()
 	int liftersDOWN = 8;
 	int armsUP = 9;
 	int armsDOWN = 10;
-	
+
 	//180D without weight is 1120
-	//180D with weight is 
-	
+	//180D with weight is
+
 	//**TO DO: INSERT AUTONOMOUS CODE**
-	
-	
+
+
 	//ONE CONE ON HIGH STACK
 	motor[leftArm] = 127;
 	motor[rightArm] = 127;
@@ -107,7 +107,48 @@ task autonomous()
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
 	wait1Msec(0300);
-	
+
+	//SKILLS:
+	if(1==1){
+
+	motor[rightMotors] = 127;
+	wait1Msec(0100);
+	motor[rightMotors] = 100;
+	motor[leftMotors] = 127;
+	wait1Msec(1500);
+	motor[lifters] = 127;
+	motor[rightMotors] = 0;
+	motor[leftMotors] = 0;
+	wait1Msec(1200);
+	motor[lifters] = 0;
+	motor[rightMotors] = 127;
+	motor[leftMotors] = -127;
+	wait1Msec(1100);
+	motor[rightMotors] = 100;
+	motor[leftMotors] = 127;
+	wait1Msec(1600);
+
+	motor[lifters] = -127;
+	motor[rightMotors] = 0;
+	motor[leftMotors] = 0;
+	wait1Msec(1200);
+	motor[lifters] = 0;
+	motor[rightMotors] = -127;
+	motor[leftMotors] = -127;
+	wait1Msec(0500);
+	motor[lifters] = 127;
+	motor[rightMotors] = 0;
+	motor[leftMotors] = 0;
+	wait1Msec(1000);
+	motor[lifters] = 0;
+	motor[leftMotors] = -127;
+	motor[rightMotors] = -127;
+	wait1Msec(1000);
+
+}
+
+	//COMP:
+	if(0==1){
 	motor[clawMovers] = -127;
 	motor[rightMotors] = 127;
 	wait1Msec(0600);
@@ -116,7 +157,7 @@ task autonomous()
 	motor[clawMovers] = 0;
 	motor[claw] = 127;
 	wait1Msec(1000);
-	
+
 	//move forward to grab the cone
 	motor[leftMotors] = 127;
 	motor[rightMotors] = 90;
@@ -127,8 +168,8 @@ task autonomous()
 	wait1Msec(1000);
 	motor[clawMovers] = 127;
 	wait1Msec(0800);
-	
-	
+
+
 	//MOVING AWAY WITH CONE
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 127;
@@ -145,11 +186,11 @@ task autonomous()
 	motor[rightMotors] = 0;
 	motor[lifters] = 127;
 	wait1Msec(1000);
-	
-	
-	
+	}
+
+
 	allMotorsOff();
-	
+
 	allOff();
 }
 
@@ -157,8 +198,94 @@ task usercontrol(){
 	while (true){
 		controllerBasic();
 		turnAround();
-	}
+		
+		
+		//==========================AUTON TEST
+		
+		if(vexRT(Btn7UXmtr2) == 1){
+		//ONE CONE ON HIGH STACK
+	motor[leftArm] = 127;
+	motor[rightArm] = 127;
+	wait1Msec(850);
+	motor[clawMovers] = 127;
+	wait1Msec(750);
+	motor[leftArm] = 0;
+	motor[rightArm] = 0;
+	wait1Msec(1000);
+	motor[leftMotors] = 127;
+	motor[rightMotors] = 20;
+	wait1Msec(0370);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	motor[clawMovers] = -60;
+	wait1Msec(0500);
+	motor[clawMovers] = 0;
+	motor[claw] = 127;
+	wait1Msec(1000);
+	motor[clawMovers] = 127;
+	motor[claw] = 0;
+	wait1Msec(1000);
+	motor[clawMovers] = 0;
+	wait1Msec(0500);
+	motor[leftMotors] = -127;
+	motor[rightMotors] = -127;
+	motor[leftArm] = -127;
+	motor[rightArm] = -127;
+	wait1Msec(400);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	wait1Msec(0100);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	wait1Msec(0300);
+
+	//SKILLS:
+	if(1==1){
+
+	motor[rightMotors] = 127;
+	wait1Msec(0100);
+	motor[rightMotors] = 100;
+	motor[leftMotors] = 127;
+	wait1Msec(1250);
+	motor[lifters] = 127;
+	motor[rightMotors] = 0;
+	motor[leftMotors] = 0;
+	wait1Msec(1200);
+	motor[lifters] = 0;
+	motor[rightMotors] = 127;
+	motor[leftMotors] = -127;
+	wait1Msec(1200);
+	motor[rightMotors] = 100;
+	motor[leftMotors] = 127;
+	wait1Msec(2000);
+
+	motor[lifters] = -127;
+	motor[rightMotors] = 0;
+	motor[leftMotors] = 0;
+	wait1Msec(1200);
+	motor[lifters] = 0;
+	motor[rightMotors] = -127;
+	motor[leftMotors] = -127;
+	wait1Msec(0500);
+	motor[lifters] = 127;
+	wait1Msec(1000);
+	motor[lifters] = 0;
+	motor[leftMotors] = -127;
+	motor[rightMotors] = -127;
+	wait1Msec(1000);
+
 }	
+	}
+	
+		
+		
+		//===========================AUTON TEST
+		
+		
+		
+		
+	}
+}
 
 //==================================================================================================
 //                           C E N T R A L   F U N C T I O N S   S E C T I O N
@@ -174,9 +301,9 @@ task usercontrol(){
 //==================================================================================================
 
 void controllerBasic(){
-	
+
 	//Arcade(vexRT(Ch4), vexRT(Ch3));
-	
+
 	//========
 	//BASE
 	if(vexRT[Btn8D] == 1) {
@@ -192,7 +319,7 @@ void controllerBasic(){
 		motorBackward(); //move backward
 		wait1Msec(390);
 		allOff();
-		
+
 	}
 	else if(vexRT[Btn8U] == 1) {
 		motorBackward();
@@ -218,7 +345,7 @@ void controllerBasic(){
 		motor[leftMotors] = vexRT(Ch3);
 		motor[rightMotors] = vexRT(Ch2);
 	}
-	
+
 	//========
 	//LIFTERS
 	if(vexRT[Btn5U] == 1 || vexRT[Btn5UXmtr2] == 1){
@@ -230,19 +357,19 @@ void controllerBasic(){
 	else{
 		motor[lifters] = 0;
 	}
-	
+
 	//========
 	//ARMS
 	motor[leftArm] = vexRT(Ch3Xmtr2);
 	motor[rightArm] = vexRT(Ch3Xmtr2);
-	
+
 	//========
 	//SERVOS
 	//Zach'll put rubber bands to stop claw from walling when holding the claw
 	//if claw still falls, Zach will change the gearing and remodify
-	
+
 	motor(clawMovers) = vexRT(Ch2Xmtr2);
-	
+
 	if(vexRT[Btn6UXmtr2] == 1 || vexRT[Btn6U] == 1){
 		motor[claw] = 127; //this closes claw, not changed
 	}
@@ -252,9 +379,9 @@ void controllerBasic(){
 	else{
 		motor[claw] = 0; //removed other stop motor statements
 	}
-	
-	
-	
+
+
+
 	//========
 	//Extra Necessary
 	while(0 == 1){
@@ -331,13 +458,13 @@ void motorPointC(){
 }
 
 void driveFunct(int direction, int duration){
-	
+
 	//1 = Forward
 	//2 = Backward
 	//3 = MOTOR Left
 	//4 = MOTOR Right
-	
-	
+
+
 	if(direction == 1){
 		motorForward();
 		wait1Msec(duration);
@@ -381,7 +508,7 @@ void driveFunct(int direction, int duration){
 		wait1Msec(duration);
 	}
 	else{
-	
+
 	}
 }
 
