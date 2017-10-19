@@ -1,3 +1,4 @@
+#pragma config(Sensor, in1,    potSnesor,  sensorPotentiometer)
 #pragma config(Sensor, dgtl9,  RightBottomEnc, sensorQuadEncoder)
 #pragma config(Sensor, dgtl11, LeftBottomEnc,  sensorQuadEncoder)
 #pragma config(Motor,  port2,           leftMotors,    tmotorVex393_MC29, openLoop, driveLeft)
@@ -109,7 +110,7 @@ task autonomous()
 	wait1Msec(0300);
 
 	//SKILLS:
-	if(1==1){
+	if(SensorValue[potSensor] < 2000){
 
 	motor[rightMotors] = 127;
 	wait1Msec(0100);
@@ -148,7 +149,7 @@ task autonomous()
 }
 
 	//COMP:
-	if(0==1){
+	else {
 	motor[clawMovers] = -127;
 	motor[rightMotors] = 127;
 	wait1Msec(0600);
