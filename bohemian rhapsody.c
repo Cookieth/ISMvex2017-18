@@ -50,6 +50,7 @@ int abs(int n);
 void compAuton();
 void skillsAuton();
 void setupAuton();
+void pushLifter();
 
 //==================================================================================================
 //                     		      T A S K   S E C T I O N
@@ -104,16 +105,16 @@ task usercontrol(){
 //                           C E N T R A L   F U N C T I O N S   S E C T I O N
 //--------------------------------------------------------------------------------------------------
 //			MAIN FUNCTIONS:
-//				1. CONTROLLER BASIC (119)
-//				2. DRIVE FUNCT (246)
-//				3. DRIVE UNTIL (319)
-//				4. COMP AUTON (377)
-//				5. SKILLS AUTON (409)
+//				1. CONTROLLER BASIC (120)
+//				2. DRIVE FUNCT (263)
+//				3. DRIVE UNTIL (336)
+//				4. COMP AUTON (394)
+//				5. SKILLS AUTON (426)
 //
 //			CONTROLLER INDEX:
-//				1. DRIVE CONTROLLER SECTION (200)
-//				2. ENCODER CONTROLLER SECTION (288)
-//				3. AUTONOMOUS CONTROLLER SECTION (374)
+//				1. DRIVE CONTROLLER SECTION (217)
+//				2. ENCODER CONTROLLER SECTION (305)
+//				3. AUTONOMOUS CONTROLLER SECTION (391)
 //==================================================================================================
 
 void controllerBasic(){
@@ -123,7 +124,7 @@ void controllerBasic(){
 	if(vexRT[Btn8U] == 1) {
 		resetEncoders();
 	}
-	else if(vexRT[Btn8D] == 1) { //test button for competition autonomous
+	else if(vexRT[Btn8L] == 1) { //test button for competition autonomous
 		compAuton();
 	}
 	else if(vexRT[Btn7U] == 1) {
@@ -161,6 +162,9 @@ void controllerBasic(){
 			motor[lifters] = 0;
 		}
 	}
+	else if(vexRT[Btn8D] == 1) {
+		pushLifter();
+	}
 	else{
 		motor[lifters] = 0;
 	}
@@ -171,13 +175,24 @@ void controllerBasic(){
 		motor[leftArm] = 0;
 		motor[rightArm] = 0;
 	}
+	else if(vexRT(Ch3Xmtr2) > 5 || vexRT(Ch3Xmtr2) < -5){
+		if(SensorValue[leftLiftSensor] > 1808 || SensorValue[rightLiftSensor] > 3550)  {
+			motor[lifters] = -127;
+			motor[leftArm] = 0;
+			motor[rightArm] = 0;
+		}
+		else {
+			motor[leftArm] = vexRT(Ch3Xmtr2);
+			motor[rightArm] = vexRT(Ch3Xmtr2);
+		}
+	}
 	else {
-		motor[leftArm] = vexRT(Ch3Xmtr2);
-		motor[rightArm] = vexRT(Ch3Xmtr2);
+		motor[leftArm] = 0;
+		motor[rightArm] = 0;
 	}
 
 	//=========
-	//ELBOW and CLAW
+	//ELBOW
 	if(SensorValue[ElbowLimit] == 1 && vexRT(Ch2Xmtr2) > 0) { //if sensor is pressed and elbow is not to move down
 		motor[elbow] = 0;
 	}
@@ -185,6 +200,8 @@ void controllerBasic(){
 		motor[elbow] = vexRT(Ch2Xmtr2);
 	}
 
+	//=========
+	//CLAW
 	if(vexRT[Btn6UXmtr2] == 1 || vexRT[Btn6U] == 1){
 		motor[claw] = 127; //this closes claw
 	}
@@ -487,4 +504,14 @@ void setupAuton() {
 	wait1Msec(200);
 	motor[rightArm] = 0;
 	motor[leftArm] = 0;
+}
+
+void pushLifter() {
+	while(SensorValue[leftLiftSensor] > 1374 || SensorValue[rightLiftSensor] > 3050) { 
+		motor[lifters] = -127;
+	}
+	while(SensorValue[leftLiftSensor] < 2025 || SensorValue[rightLiftSensor] < 3800) { 
+		motor[lifters] = 127;
+	}
+	motor[lifters] = 0;
 }
