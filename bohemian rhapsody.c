@@ -314,10 +314,10 @@ void driveUntil(int right, int left) { //target number of ticks from right and l
 void compAuton() {
 	setupAuton();
 	//---DRIVE UNTIL PROXIMITY ALLOWS FOR CONE DROP---//
-	driveUntil(850,850); //800 when low on power, 850 when full
+	driveUntil(800,800);
 	//---LOWER ELBOW---//
 	motor[elbow] = -127;
-	wait1Msec(450); //850 when in low power, 450 when full power
+	wait1Msec(300); //850 when in low power, 300 when full power
 	motor[elbow] = 0;
 	wait1Msec(500);
 	//---DROP CONE---//
@@ -353,7 +353,7 @@ void compAuton() {
 	motor[rightMotors] = 0;
 	motor[leftMotors] = -127;
 	motor[rightMotors] = -45;
-	wait1Msec(2300);
+	wait1Msec(3300); //2300 when low on power, 3300 when high on power
 	resetEncoders();
 	motor[leftMotors] = -127;
 	motor[rightMotors] = 127;
@@ -437,6 +437,12 @@ void setupAuton() {
 	motor[leftArm] = -127;
 	wait1Msec(500);
 	motor[claw] = 0;
+	motor[rightArm] = 127;
+	motor[leftArm] = 127;
+	wait1Msec(250);
+	motor[rightArm] = -127;
+	motor[leftArm] = -127;
+	wait1Msec(200);
 	motor[rightArm] = 0;
 	motor[leftArm] = 0;
 }
