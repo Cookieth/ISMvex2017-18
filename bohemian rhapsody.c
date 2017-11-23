@@ -115,7 +115,7 @@ void controllerBasic(){
 	else if(vexRT[Btn8L] == 1) { //test button for competition autonomous
 		compAuton();
 	}
-	else if(vexRT[Btn8R] == 1) { 
+	else if(vexRT[Btn8R] == 1) {
 		skillsAuton();
 	}
 	else if(vexRT[Btn8D] == 1) {
@@ -316,32 +316,73 @@ void driveUntil(int right, int left) { //target number of ticks from right and l
 //==================================================================================================
 
 void compAuton() {
-	driveUntil(250,250);
-	motor[leftMotors] = -127;
-	motor[rightMotors] = 127;
-	wait1Msec(770); //1000 when low on power, 770 when high on power
-	motor[leftMotors] = 0;
-	motor[rightMotors] = 0;
-	driveUntil(210,210);
+	setupAuton();
+	while(SensorValue[leftLiftSensor] > 1680 || SensorValue[rightLiftSensor] > 3200) {
+		motor[lifters] = 127;
+	}
+	motor[lifters] = 0;
 	motor[leftMotors] = 127;
 	motor[rightMotors] = -127;
-	wait1Msec(725); //1000 when low on power, 720 when high on power
+	wait1Msec(65);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	driveUntil(775,775);
+	motor[leftMotors] = 127;
+	motor[rightMotors] = -127;
+	wait1Msec(85);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	driveUntil(775,775);
+	driveUntil(-350,-350);
+	motor[leftMotors] = -127;
+	motor[rightMotors] = 127;
+	wait1Msec(222);
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
 	while(SensorValue[leftLiftSensor] > 940 || SensorValue[rightLiftSensor] > 2550) {
 		motor[lifters] = -127;
 	}
 	motor[lifters] = 0;
-	driveUntil(1350,1350);
-	driveUntil(-250,-250);
+	driveUntil(305,305);
+	wait1Msec(100);
+	while(SensorValue[leftLiftSensor] < 1950 || SensorValue[rightLiftSensor] < 3850) {
+		motor[lifters] = 127;
+	}
+	motor[lifters] = 0;
+	driveUntil(-350,-350);
 	motor[leftMotors] = 127;
 	motor[rightMotors] = -127;
-	wait1Msec(180); //1000 when low on power, 770 when high on power
+	wait1Msec(175);
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
-	driveUntil(250,250);
-	
-	
+	driveUntil(-1000,-1000);
+	motor[leftMotors] = -127;
+	motor[rightMotors] = 127;
+	wait1Msec(500);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	driveUntil(-90,-90);
+	motor[leftMotors] = -127;
+	motor[rightMotors] = 127;
+	wait1Msec(725);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	motor[leftMotors] = 127;
+	motor[rightMotors] = 127;
+	wait1Msec(1600);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	while(SensorValue[leftLiftSensor] > 1374 || SensorValue[rightLiftSensor] > 3050) {
+		motor[lifters] = -127;
+	}
+	motor[lifters] = 20;
+	motor[leftMotors] = -127;
+	motor[rightMotors] = -127;
+	wait1Msec(1000);
+	motor[lifters] = 0;
+	motor[leftMotors] = 0;
+
+
 	/*
 	setupAuton();
 	//---DRIVE UNTIL PROXIMITY ALLOWS FOR CONE DROP---//
@@ -489,7 +530,7 @@ void skillsAuton() {
 		motor[lifters] = 127;
 	}
 	motor[lifters] = 0;
-	
+
 	//***REPEAT AGAIN***//
 	driveUntil(250,250);
 	motor[leftMotors] = 127;
@@ -549,7 +590,7 @@ void skillsAuton() {
 	motor[lifters] = 0;
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
-	
+
 	allMotorsOff();
 }
 
