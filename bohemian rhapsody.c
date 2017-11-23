@@ -320,6 +320,8 @@ void compAuton() {
 	while(SensorValue[leftLiftSensor] > 1680 || SensorValue[rightLiftSensor] > 3200) {
 		motor[lifters] = 127;
 	}
+	
+	/*
 	motor[lifters] = 0;
 	motor[leftMotors] = 127;
 	motor[rightMotors] = -127;
@@ -380,13 +382,17 @@ void compAuton() {
 	motor[rightMotors] = -127;
 	wait1Msec(1000);
 	motor[lifters] = 0;
-	motor[leftMotors] = 0;
+	motor[leftMotors] = 0; 
+	*/
 
-
-	/*
-	setupAuton();
 	//---DRIVE UNTIL PROXIMITY ALLOWS FOR CONE DROP---//
-	driveUntil(800,800);
+	driveUntil(300,300);
+	motor[leftMotors] = 127;
+	motor[rightMotors] = -127;
+	wait1Msec(30);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	driveUntil(500,500);
 	//---LOWER ELBOW---//
 	motor[elbow] = -127;
 	wait1Msec(300); //850 when in low power, 300 when full power
@@ -444,7 +450,8 @@ void compAuton() {
 	wait1Msec(1000);
 	motor[lifters] = 0;
 	motor[leftMotors] = 0;
-	motor[rightMotors] = 0; */
+	motor[rightMotors] = 0;
+	
 	allMotorsOff();
 }
 
