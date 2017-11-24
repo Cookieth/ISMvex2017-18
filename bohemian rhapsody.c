@@ -39,6 +39,8 @@ void compAuton();
 void skillsAuton();
 void setupAuton();
 void pushLifter();
+void leftAltAuton();
+void rightAltAuton();
 
 //==================================================================================================
 //                     		      T A S K   S E C T I O N
@@ -73,10 +75,18 @@ task autonomous()
 	int armsDOWN = 10;
 
 	//SKILLS:
-	if(SensorValue[potSensor] < 2000){
-		skillsAuton();
+	if(SensorValue[potSensor] < 1000){
+		compAuton();
 	}
-
+	else if(SensorValue[potSensor] < 2000) {
+		rightAltAuton();
+	}
+	else if(SensorValue[potSensor] < 3000) {
+		leftAltAuton();
+	}
+	else if(SensorValue[potSensor] < 4000) {
+		setupAuton();
+	}
 	//COMP:
 	else {
 		compAuton();
@@ -112,11 +122,24 @@ void controllerBasic(){
 	if(vexRT[Btn8U] == 1) {
 		resetEncoders();
 	}
-	else if(vexRT[Btn8L] == 1) { //test button for competition autonomous
-		compAuton();
-	}
-	else if(vexRT[Btn8R] == 1) {
-		skillsAuton();
+	else if(vexRT[Btn8L] == 1) { //test button for autonomous
+		//SKILLS:
+		if(SensorValue[potSensor] < 1000){
+			compAuton();
+		}
+		else if(SensorValue[potSensor] < 2000) {
+			rightAltAuton();
+		}
+		else if(SensorValue[potSensor] < 3000) {
+			leftAltAuton();
+		}
+		else if(SensorValue[potSensor] < 4000) {
+			setupAuton();
+		}
+		//COMP:
+		else {
+			compAuton();
+		}
 	}
 	else if(vexRT[Btn8D] == 1) {
 		motor[leftMotors] = -127;
@@ -315,75 +338,11 @@ void driveUntil(int right, int left) { //target number of ticks from right and l
 //                      A U T O N O M O U S   C O N T R O L L E R   S E C T I O N
 //==================================================================================================
 
-void compAuton() {
+void compAuton() { //start at 6" to 23.5"
 	setupAuton();
 	while(SensorValue[leftLiftSensor] > 1680 || SensorValue[rightLiftSensor] > 3200) {
 		motor[lifters] = 127;
 	}
-	
-	/*
-	motor[lifters] = 0;
-	motor[leftMotors] = 127;
-	motor[rightMotors] = -127;
-	wait1Msec(65);
-	motor[leftMotors] = 0;
-	motor[rightMotors] = 0;
-	driveUntil(775,775);
-	motor[leftMotors] = 127;
-	motor[rightMotors] = -127;
-	wait1Msec(85);
-	motor[leftMotors] = 0;
-	motor[rightMotors] = 0;
-	driveUntil(775,775);
-	driveUntil(-350,-350);
-	motor[leftMotors] = -127;
-	motor[rightMotors] = 127;
-	wait1Msec(222);
-	motor[leftMotors] = 0;
-	motor[rightMotors] = 0;
-	while(SensorValue[leftLiftSensor] > 940 || SensorValue[rightLiftSensor] > 2550) {
-		motor[lifters] = -127;
-	}
-	motor[lifters] = 0;
-	driveUntil(305,305);
-	wait1Msec(100);
-	while(SensorValue[leftLiftSensor] < 1950 || SensorValue[rightLiftSensor] < 3850) {
-		motor[lifters] = 127;
-	}
-	motor[lifters] = 0;
-	driveUntil(-350,-350);
-	motor[leftMotors] = 127;
-	motor[rightMotors] = -127;
-	wait1Msec(175);
-	motor[leftMotors] = 0;
-	motor[rightMotors] = 0;
-	driveUntil(-1000,-1000);
-	motor[leftMotors] = -127;
-	motor[rightMotors] = 127;
-	wait1Msec(500);
-	motor[leftMotors] = 0;
-	motor[rightMotors] = 0;
-	driveUntil(-90,-90);
-	motor[leftMotors] = -127;
-	motor[rightMotors] = 127;
-	wait1Msec(725);
-	motor[leftMotors] = 0;
-	motor[rightMotors] = 0;
-	motor[leftMotors] = 127;
-	motor[rightMotors] = 127;
-	wait1Msec(1600);
-	motor[leftMotors] = 0;
-	motor[rightMotors] = 0;
-	while(SensorValue[leftLiftSensor] > 1374 || SensorValue[rightLiftSensor] > 3050) {
-		motor[lifters] = -127;
-	}
-	motor[lifters] = 20;
-	motor[leftMotors] = -127;
-	motor[rightMotors] = -127;
-	wait1Msec(1000);
-	motor[lifters] = 0;
-	motor[leftMotors] = 0; 
-	*/
 
 	//---DRIVE UNTIL PROXIMITY ALLOWS FOR CONE DROP---//
 	driveUntil(300,300);
@@ -392,7 +351,12 @@ void compAuton() {
 	wait1Msec(30);
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
-	driveUntil(500,500);
+	driveUntil(510,510);
+	motor[leftMotors] = -127;
+	motor[rightMotors] = 127;
+	wait1Msec(50);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
 	//---LOWER ELBOW---//
 	motor[elbow] = -127;
 	wait1Msec(300); //850 when in low power, 300 when full power
@@ -412,10 +376,10 @@ void compAuton() {
 	}
 	motor[lifters] = 0;
 	//---MOVE FORWARD TO PICK GOAL UP---//
-	driveUntil(-100,-100);
+	//driveUntil(-100,-100);
 	motor[leftMotors] = 127;
 	motor[rightMotors] = 127;
-	wait1Msec(1750);
+	wait1Msec(1000);
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
 	//---RAISE LIFTERS---//
@@ -426,16 +390,16 @@ void compAuton() {
 	//---DRIVE BACK---//
 	motor[leftMotors] = -127;
 	motor[rightMotors] = -127;
-	wait1Msec(1750);
+	wait1Msec(1500);
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
 	motor[leftMotors] = -127;
 	motor[rightMotors] = -45;
-	wait1Msec(3300); //2300 when low on power, 3300 when high on power
+	wait1Msec(2200);
 	resetEncoders();
 	motor[leftMotors] = -127;
 	motor[rightMotors] = 127;
-	wait1Msec(810); //1000 when low on power, 810 when high on power
+	wait1Msec(910); //1000 when low on power, 810 when high on power
 	motor[leftMotors] = 127;
 	motor[rightMotors] = 127;
 	wait1Msec(1400);
@@ -451,11 +415,11 @@ void compAuton() {
 	motor[lifters] = 0;
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
-	
+
 	allMotorsOff();
 }
 
-void skillsAuton() {
+void skillsAuton() { //start at 24.5"
 	//setupAuton();
 	driveUntil(750,700);
 	//---RAISE LIFTERS---//
@@ -612,25 +576,25 @@ void setupAuton() {
 	//---RAISE ARM TO ALLOW ELBOW TO EXTEND---//
 	motor[rightArm] = 127;
 	motor[leftArm] = 127;
-	wait1Msec(1100); //1500 when low on power, 1100 when high
+	wait1Msec(1300); //1500 when low on power, 1300 when high
 	motor[rightArm] = 0;
 	motor[leftArm] = 0;
 	//---RAISE ELBOW---//
 	motor[elbow] = 127;
-	wait1Msec(1300); //1500 when low on power, 1300 when high
+	wait1Msec(1600);
 	motor[elbow] = 0;
 	//---LOWER ARM---//
 	motor[claw] = -127;
 	motor[rightArm] = -127;
 	motor[leftArm] = -127;
 	wait1Msec(500);
-	motor[claw] = 0;
 	motor[rightArm] = 127;
 	motor[leftArm] = 127;
-	wait1Msec(250);
+	wait1Msec(150);
+	motor[claw] = 0;
 	motor[rightArm] = -127;
 	motor[leftArm] = -127;
-	wait1Msec(200);
+	wait1Msec(150);
 	motor[rightArm] = 0;
 	motor[leftArm] = 0;
 }
@@ -641,6 +605,106 @@ void pushLifter() {
 	}
 	while(SensorValue[leftLiftSensor] < 2025 || SensorValue[rightLiftSensor] < 3800) {
 		motor[lifters] = 127;
+	}
+	motor[lifters] = 0;
+}
+
+void leftAltAuton() {  //start at 11"
+	setupAuton();
+	while(SensorValue[leftLiftSensor] > 1680 || SensorValue[rightLiftSensor] > 3200) {
+		motor[lifters] = 127;
+	}
+	motor[lifters] = 0;
+	motor[leftMotors] = 127;
+	motor[rightMotors] = -127;
+	wait1Msec(65);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	driveUntil(775,775);
+	motor[leftMotors] = 127;
+	motor[rightMotors] = -127;
+	wait1Msec(85);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	driveUntil(775,775);
+	driveUntil(-350,-350);
+	motor[leftMotors] = -127;
+	motor[rightMotors] = 127;
+	wait1Msec(222);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	while(SensorValue[leftLiftSensor] > 940 || SensorValue[rightLiftSensor] > 2550) {
+		motor[lifters] = -127;
+	}
+	motor[lifters] = 0;
+	/*
+	driveUntil(305,305);
+	wait1Msec(100);
+	while(SensorValue[leftLiftSensor] < 1950 || SensorValue[rightLiftSensor] < 3850) {
+		motor[lifters] = 127;
+	}
+	motor[lifters] = 0;
+	driveUntil(-350,-350);
+	motor[leftMotors] = 127;
+	motor[rightMotors] = -127;
+	wait1Msec(175);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	driveUntil(-1000,-1000);
+	motor[leftMotors] = -127;
+	motor[rightMotors] = 127;
+	wait1Msec(500);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	driveUntil(-90,-90);
+	motor[leftMotors] = -127;
+	motor[rightMotors] = 127;
+	wait1Msec(725);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	motor[leftMotors] = 127;
+	motor[rightMotors] = 127;
+	wait1Msec(1600);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	while(SensorValue[leftLiftSensor] > 1374 || SensorValue[rightLiftSensor] > 3050) {
+		motor[lifters] = -127;
+	}
+	motor[lifters] = 20;
+	motor[leftMotors] = -127;
+	motor[rightMotors] = -127;
+	wait1Msec(1000);
+	motor[lifters] = 0;
+	motor[leftMotors] = 0;
+	*/
+}
+
+void rightAltAuton() {  //start at 11"
+	setupAuton();
+	while(SensorValue[leftLiftSensor] > 1680 || SensorValue[rightLiftSensor] > 3200) {
+		motor[lifters] = 127;
+	}
+	motor[lifters] = 0;
+	motor[leftMotors] = 127;
+	motor[rightMotors] = -127;
+	wait1Msec(65);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	driveUntil(775,775);
+	motor[leftMotors] = 127;
+	motor[rightMotors] = -127;
+	wait1Msec(85);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	driveUntil(775,775);
+	driveUntil(-350,-350);
+	motor[leftMotors] = -127;
+	motor[rightMotors] = 127;
+	wait1Msec(222);
+	motor[leftMotors] = 0;
+	motor[rightMotors] = 0;
+	while(SensorValue[leftLiftSensor] > 940 || SensorValue[rightLiftSensor] > 2550) {
+		motor[lifters] = -127;
 	}
 	motor[lifters] = 0;
 }
