@@ -121,6 +121,10 @@ task usercontrol(){
 //				3. AUTONOMOUS CONTROLLER SECTION (391)
 //==================================================================================================
 
+//==================================================================================================
+//                             D R I V E   C O N T R O L L E R   S E C T I O N
+//==================================================================================================
+
 void controllerBasic(){
 
 	//========
@@ -151,28 +155,7 @@ void controllerBasic(){
 		}
 	}
 	else if(vexRT[Btn8D] == 1) {
-		motor[leftMotors] = -127;
-		motor[rightMotors] = -45;
-		wait1Msec(2200);
-		resetEncoders();
-		motor[leftMotors] = -127;
-		motor[rightMotors] = 127;
-		wait1Msec(1000);
-		motor[leftMotors] = 127;
-		motor[rightMotors] = 127;
-		wait1Msec(2000);
-		motor[leftMotors] = 0;
-		motor[rightMotors] = 0;
-		while(SensorValue[leftLiftSensor] > 1374 || SensorValue[rightLiftSensor] > 3050) {
-			motor[lifters] = -127;
-		}
-		motor[lifters] = 20;
-		motor[leftMotors] = -127;
-		motor[rightMotors] = -127;
-		wait1Msec(1000);
-		motor[lifters] = 0;
-		motor[leftMotors] = 0;
-		motor[rightMotors] = 0;
+		pushLifter();
 
 	}
 	else if(vexRT[Btn7U] == 1) {
@@ -260,10 +243,6 @@ void controllerBasic(){
 		motor[claw] = 0;
 	}
 }
-
-//==================================================================================================
-//                             D R I V E   C O N T R O L L E R   S E C T I O N
-//==================================================================================================
 
 //==================================================================================================
 //                             E N C O D E R   C O N T R O L L E R   S E C T I O N
@@ -706,14 +685,12 @@ void setupAuton() {
 	wait1Msec(1600);
 	motor[elbow] = 0;
 	//---LOWER ARM---//
-	motor[claw] = -127;
 	motor[rightArm] = -127;
 	motor[leftArm] = -127;
 	wait1Msec(500);
 	motor[rightArm] = 127;
 	motor[leftArm] = 127;
 	wait1Msec(150);
-	motor[claw] = 0;
 	motor[rightArm] = 0;
 	motor[leftArm] = 0;
 }
