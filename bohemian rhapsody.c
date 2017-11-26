@@ -78,7 +78,10 @@ task autonomous()
 	int armsDOWN = 10;
 
 	//COMP:
-	if(SensorValue[potSensor] < 1000){
+	if(SensorValue[potSensor] == 0) {
+		simpLeftAuton();
+	}
+	else if(SensorValue[potSensor] < 1000){
 		simpRightAuton();
 	}
 	else if(SensorValue[potSensor] < 2000) {
