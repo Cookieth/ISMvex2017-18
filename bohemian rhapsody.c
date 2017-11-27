@@ -135,10 +135,10 @@ void controllerBasic(){
 	else if(vexRT[Btn8L] == 1) { //test button for autonomous
 		//COMP:
 		if(SensorValue[potSensor] == 0) {
-			simpLeftAuton();
+			simpRightAuton();
 		}
 		else if(SensorValue[potSensor] < 1000){
-			simpRightAuton();
+			simpLeftAuton();
 		}
 		else if(SensorValue[potSensor] < 2000) {
 			rightAltAuton();
@@ -518,7 +518,7 @@ void skillsAuton() { //start at 23.5"
 	motor[rightMotors] = 0;
 	//---RAISE ELBOW---//
 	motor[elbow] = 127;
-	wait1Msec(550);
+	wait1Msec(600);
 	motor[elbow] = 0;
 	motor[leftMotors] = 127;
 	motor[rightMotors] = 127;
@@ -528,22 +528,22 @@ void skillsAuton() { //start at 23.5"
 	while(SensorValue[leftLiftSensor] > 1374 || SensorValue[rightLiftSensor] > 3050) {
 		motor[lifters] = -127;
 	}
-	motor[lifters] = 20;
+	motor[lifters] = 10;
 	motor[leftMotors] = -127;
 	motor[rightMotors] = -127;
-	wait1Msec(1000);
+	wait1Msec(1100);
 	motor[lifters] = 0;
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
 	motor[leftMotors] = -127;
 	motor[rightMotors] = 127;
-	wait1Msec(825); //1000 when low on power, 810 when high on power
+	wait1Msec(840); //1000 when low on power, 810 when high on power
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
 	driveUntil(200,200);
 	motor[leftMotors] = -127;
 	motor[rightMotors] = 127;
-	wait1Msec(825); //1000 when low on power, 810 when high on power
+	wait1Msec(840); //1000 when low on power, 810 when high on power
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
 	while(SensorValue[leftLiftSensor] > 940 || SensorValue[rightLiftSensor] > 2550) {
@@ -567,7 +567,7 @@ void skillsAuton() { //start at 23.5"
 	driveUntil(770,770);
 	//---RAISE ELBOW---//
 	motor[elbow] = 127;
-	wait1Msec(550);
+	wait1Msec(600);
 	motor[elbow] = 0;
 	while(SensorValue[leftLiftSensor] > 940 || SensorValue[rightLiftSensor] > 2550) {
 		motor[lifters] = -127;
@@ -610,22 +610,22 @@ void skillsAuton() { //start at 23.5"
 	while(SensorValue[leftLiftSensor] > 1374 || SensorValue[rightLiftSensor] > 3050) {
 		motor[lifters] = -127;
 	}
-	motor[lifters] = 20;
+	motor[lifters] = 10;
 	motor[leftMotors] = -127;
 	motor[rightMotors] = -127;
-	wait1Msec(1000);
+	wait1Msec(1100);
 	motor[lifters] = 0;
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
 	motor[leftMotors] = -127;
 	motor[rightMotors] = 127;
-	wait1Msec(825); //1000 when low on power, 810 when high on power
+	wait1Msec(840); //1000 when low on power, 810 when high on power
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
 	driveUntil(200,200);
 	motor[leftMotors] = -127;
 	motor[rightMotors] = 127;
-	wait1Msec(825); //1000 when low on power, 810 when high on power
+	wait1Msec(840); //1000 when low on power, 810 when high on power
 	motor[leftMotors] = 0;
 	motor[rightMotors] = 0;
 	while(SensorValue[leftLiftSensor] > 940 || SensorValue[rightLiftSensor] > 2550) {
