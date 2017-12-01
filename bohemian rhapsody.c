@@ -765,6 +765,45 @@ void setupAuton() {
 	motor[leftArm] = 0;
 }
 
+void statAuton() {
+	resetEncoders();
+	//---EXTEND LIFTERS---//
+	while(SensorValue[leftLiftSensor] > 1380 || SensorValue[rightLiftSensor] > 2900) {
+		//while lifters are not fully extended, extend lifters
+		motor[lifters] = -127;
+	}
+	motor[lifters] = 0;
+	//---RAISE ARM TO ALLOW ELBOW TO EXTEND---//
+	while(SensorValue[ArmLimit] != 1) {
+		motor[rightArm] = 127;
+		motor[leftArm] = 127;
+	}
+	motor[rightArm] = 0;
+	motor[leftArm] = 0;
+	//---RAISE ELBOW---//
+	motor[elbow] = 127;
+	wait1Msec(2000);
+	motor[elbow] = 0;
+	driveUntil(200,200);
+	//---LOWER ELBOW---//
+	motor[elbow] = -127;
+	wait1Msec(200);
+	motor[elbow] = 0;
+	motor[claw] = 127;
+	wait1Msec(250);
+	motor[claw] = 0;
+	driveUntil(-200,-200);
+	//---LOWER ARM---//
+	motor[rightArm] = -127;
+	motor[leftArm] = -127;
+	wait1Msec(750);
+	motor[rightArm] = 127;
+	motor[leftArm] = 127;
+	wait1Msec(150);
+	motor[rightArm] = 0;
+	motor[leftArm] = 0;
+}
+
 void pushLifter() {
 	while(SensorValue[leftLiftSensor] > 1374 || SensorValue[rightLiftSensor] > 3050) {
 		motor[lifters] = -127;
